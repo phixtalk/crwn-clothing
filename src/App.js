@@ -23,7 +23,9 @@ class App extends React.Component {
   componentDidMount() {
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
+        console.log("first checkpoint");
         const userRef = await createUserProfileDocument(userAuth);
+        console.log("second checkpoint");
 
         userRef.onSnapshot(snapShot => {
           this.setState(
@@ -39,7 +41,8 @@ class App extends React.Component {
       }
 
       this.setState({ currentUser: userAuth });
-      console.log("got here");
+      console.log("third checkpoint");
+      console.log("userAuth:", userAuth);
     });
   }
 
