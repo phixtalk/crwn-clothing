@@ -10,9 +10,10 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "./redux/user/user.selectors";
 
+import { selectCurrentUser } from "./redux/user/user.selectors";
 import { setCurrentUser } from "./redux/user/user.action";
+
 import { connect } from "react-redux";
 import CheckoutPage from "./pages/checkout/checkout.component";
 
@@ -26,7 +27,7 @@ class App extends React.Component {
       if (userAuth) {
         console.log("first checkpoint");
         const userRef = await createUserProfileDocument(userAuth);
-        console.log("second checkpoint");
+        //console.log(userAuth);
 
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
@@ -39,8 +40,12 @@ class App extends React.Component {
       }
 
       setCurrentUser(userAuth);
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
       console.log("third checkpoint");
-      console.log("userAuth:", userAuth);
+      //console.log("userAuth:", userAuth);
     });
   }
 
